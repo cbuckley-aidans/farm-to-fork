@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable and Ethical Farming for Year 7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        .term {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            cursor: pointer;
+            color: #0ea5e9;
+        }
+        .tooltip {
+            visibility: hidden;
+            position: fixed;
+            background-color: #10b981;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .active {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Notification tooltip -->
+    <div id="tooltip" class="tooltip">Term copied to clipboard!</div>
+
+    <!-- Header -->
+    <header class="bg-green-600 text-white py-6 shadow-md">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-center">Sustainable and Ethical Farming</h1>
+            <p class="text-center mt-2">Learning how farmers can work with nature</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-green-700 text-white sticky top-0 z-10 shadow-md">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center py-3 gap-x-1 gap-y-2 text-sm md:text-base">
+                <li><a href="#intro" class="px-3 py-2 rounded hover:bg-green-800 transition">Introduction</a></li>
+                <li><a href="#poultry" class="px-3 py-2 rounded hover:bg-green-800 transition">Pasture Raised Poultry</a></li>
+                <li><a href="#aquaculture" class="px-3 py-2 rounded hover:bg-green-800 transition">Aquaculture</a></li>
+                <li><a href="#beef" class="px-3 py-2 rounded hover:bg-green-800 transition">Pasture Raised Beef</a></li>
+                <li><a href="#pork" class="px-3 py-2 rounded hover:bg-green-800 transition">Pasture Raised Pork</a></li>
+                <li><a href="#fodder" class="px-3 py-2 rounded hover:bg-green-800 transition">Fodder Production</a></li>
+                <li><a href="#water-conservation" class="px-3 py-2 rounded hover:bg-green-800 transition">Water Conservation</a></li>
+                <li><a href="#natural-fertilizers" class="px-3 py-2 rounded hover:bg-green-800 transition">Natural Fertilizers</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introduction Section -->
+        <section id="intro" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">What is Sustainable and Ethical Farming?</h2>
+            <p class="mb-4">
+                Sustainable and ethical farming means raising animals and growing crops in ways that:
+            </p>
+            <ul class="list-disc pl-6 mb-4 space-y-2">
+                <li>Are kind to animals</li>
+                <li>Take care of the environment</li>
+                <li>Produce healthy food</li>
+                <li>Can continue for many years without damaging the land</li>
+            </ul>
+            <p>
+                In this guide, we'll explore different types of farming that follow these principles. You'll learn about how animals can be raised on natural pastures, how fish can be farmed responsibly, and how farmers grow food for their animals.
+            </p>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-6">
+                <p class="font-medium">Be curious! Throughout this page, you'll see some farming words that might be new to you. These words will be <span class="term" data-term="underlined">underlined</span>.</p>
+                <p class="mt-4">Click on them to copy the word, which you can then paste into Google to look at pictures or find out more information!</p>
+            </div>
+        </section>
+
+        <!-- Pasture Raised Poultry Section -->
+        <section id="poultry" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Pasture Raised Poultry</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <h3 class="text-xl font-semibold mb-3">Eggs and Meat Chickens</h3>
+                    <p class="mb-4">
+                        <span class="term" data-term="Pasture raised chickens for kids">Pasture raised</span> chickens live outside on grass fields where they can behave naturally. They spend their days <span class="term" data-term="Chicken foraging explained for kids">chicken foraging</span> for insects, worms, and plants along with their regular feed.
+                    </p>
+                    <p class="mb-4">
+                        Farmers often use <span class="term" data-term="Mobile chicken coops explained for kids">mobile coops</span> (chicken houses on wheels) so the chickens can be moved to fresh grass regularly. This helps keep the chickens healthy and spreads their manure across the field, which helps fertilize the soil.
+                    </p>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4">
+                        <h4 class="font-semibold">Benefits of Pasture Raised Poultry:</h4>
+                        <ul class="list-disc pl-6 space-y-1 mt-2">
+                            <li>Chickens can express natural behaviors like scratching and foraging</li>
+                            <li>Eggs and meat are often more nutritious</li>
+                            <li>Helps improve soil health</li>
+                            <li>Reduces the need for artificial fertilizers</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-feather-alt text-6xl text-amber-600 mb-4"></i>
+                            <p>Pasture raised chickens have access to sunshine, fresh air, and plenty of space to move around.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Element -->
+            <div class="mt-8 bg-green-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Chicken Facts: Did You Know?</h4>
+                <div class="flex flex-wrap gap-4 mt-4 justify-center" id="fact-buttons">
+                    <button class="fact-btn bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition">Fact 1</button>
+                    <button class="fact-btn bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition">Fact 2</button>
+                    <button class="fact-btn bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition">Fact 3</button>
+                </div>
+                <div class="mt-4 p-4 bg-white rounded-lg min-h-16 flex items-center justify-center" id="fact-display">
+                    Click a button above to learn an interesting fact about chickens!
+                </div>
+            </div>
+        </section>
+
+        <!-- Aquaculture Section -->
+        <section id="aquaculture" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Aquaculture</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <p class="mb-4">
+                        <span class="term" data-term="Aquaculture for kids">Aquaculture</span> is the farming of fish, shellfish, and aquatic plants. Instead of catching wild fish from the ocean, farmers raise them in controlled environments.
+                    </p>
+                    <p class="mb-4">
+                        Sustainable aquaculture systems can include:
+                    </p>
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><span class="term" data-term="Recirculating aquaculture systems explained">Recirculating systems</span> that clean and reuse water</li>
+                        <li><span class="term" data-term="Polyculture farming explained">Polyculture</span> ponds where multiple species live together, helping keep the system balanced</li>
+                        <li><span class="term" data-term="Aquaponics for kids">Aquaponics</span> where fish waste provides nutrients for growing plants</li>
+                    </ul>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+                        <h4 class="font-semibold">Ethical Aquaculture Practices:</h4>
+                        <ul class="list-disc pl-6 space-y-1 mt-2">
+                            <li>Providing enough space for fish to swim naturally</li>
+                            <li>Using feeds that don't deplete wild fish populations</li>
+                            <li>Minimizing pollution of surrounding waterways</li>
+                            <li>Managing fish health without overusing medications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-fish text-6xl text-blue-600 mb-4"></i>
+                            <p>Sustainable aquaculture systems work with natural processes to produce fish while protecting the environment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Element: Clickable Aquaponics System -->
+            <div class="mt-8 bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">How Aquaponics Works</h4>
+                <div class="bg-white p-4 rounded-lg" id="aquaponics-demo">
+                    <p class="text-center mb-4">Click on each part of the system to learn how aquaponics works!</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div id="fish-tank" class="bg-blue-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition relative min-h-48">
+                            <h5 class="font-semibold text-center mb-2">Fish Tank</h5>
+                            <div class="flex justify-center my-4">
+                                <i class="fas fa-fish text-4xl text-blue-500"></i>
+                            </div>
+                            <p class="text-center">Click to learn more</p>
+                        </div>
+                        
+                        <div id="bio-filter" class="bg-amber-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition relative min-h-48">
+                            <h5 class="font-semibold text-center mb-2">Biofilter</h5>
+                            <div class="flex justify-center my-4">
+                                <i class="fas fa-bacteria text-4xl text-amber-500"></i>
+                            </div>
+                            <p class="text-center">Click to learn more</p>
+                        </div>
+                        
+                        <div id="plant-bed" class="bg-green-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition relative min-h-48">
+                            <h5 class="font-semibold text-center mb-2">Plant Bed</h5>
+                            <div class="flex justify-center my-4">
+                                <i class="fas fa-seedling text-4xl text-green-500"></i>
+                            </div>
+                            <p class="text-center">Click to learn more</p>
+                        </div>
+                    </div>
+                    
+                    <div id="aquaponics-info" class="bg-slate-50 p-4 rounded-lg mt-4 text-center">
+                        Click on a part of the system above to learn how it works!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pasture Raised Beef Section -->
+        <section id="beef" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Pasture Raised Beef</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <p class="mb-4">
+                        Pasture raised cattle eat grass and other plants growing in fields. Farmers who raise cattle this way often use a method called <span class="term" data-term="Rotational grazing for kids">rotational grazing</span>.
+                    </p>
+                    <p class="mb-4">
+                        With rotational grazing, farmers divide their land into smaller sections called <span class="term" data-term="Paddocks in farming explained">paddocks</span>. Cattle graze in one paddock for a short time before being moved to the next. This gives the grass time to regrow and helps keep the soil healthy.
+                    </p>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4">
+                        <h4 class="font-semibold">Environmental Benefits:</h4>
+                        <ul class="list-disc pl-6 space-y-1 mt-2">
+                            <li>Well-managed grazing can increase soil <span class="term" data-term="Carbon sequestration explained for kids">carbon sequestration</span></li>
+                            <li>Improves water retention in soil</li>
+                            <li>Supports diverse plant and insect life</li>
+                            <li>Can help restore damaged grasslands</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-cow text-6xl text-amber-800 mb-4"></i>
+                            <p>Cattle are natural grass-eaters and can help maintain healthy grassland ecosystems when managed properly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Element: Rotational Grazing -->
+            <div class="mt-8 bg-green-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Rotational Grazing Demonstration</h4>
+                <div class="relative bg-white p-4 rounded-lg" id="rotational-grazing">
+                    <div class="grid grid-cols-4 gap-2 mb-4">
+                        <div class="paddock bg-green-300 h-24 rounded flex items-center justify-center cursor-pointer"></div>
+                        <div class="paddock bg-green-300 h-24 rounded flex items-center justify-center cursor-pointer"></div>
+                        <div class="paddock bg-green-300 h-24 rounded flex items-center justify-center cursor-pointer"></div>
+                        <div class="paddock bg-green-300 h-24 rounded flex items-center justify-center cursor-pointer"></div>
+                    </div>
+                    <div class="text-center">
+                        <button id="rotate-cattle" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition">
+                            Move Cattle
+                        </button>
+                    </div>
+                    <p class="mt-4 text-center" id="grazing-info">
+                        Click "Move Cattle" to see how rotational grazing works.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Water Conservation Section -->
+        <section id="water-conservation" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Water Conservation</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <h3 class="text-xl font-semibold mb-3">Saving Water on the Farm</h3>
+                    <p class="mb-4">
+                        Water is precious, and sustainable farms use several methods to conserve it:
+                    </p>
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><span class="term" data-term="Rainwater harvesting for kids">Rainwater harvesting</span> - collecting rainwater from roofs and storing it in tanks</li>
+                        <li><span class="term" data-term="Drip irrigation systems explained for kids">Drip irrigation</span> - delivering water directly to plant roots to minimize waste</li>
+                        <li><span class="term" data-term="Swales in farming explained for kids">Swales</span> - shallow ditches that catch rainwater and allow it to slowly soak into the ground</li>
+                        <li><span class="term" data-term="Garden mulching for kids">Mulching</span> - covering soil with organic material to reduce evaporation</li>
+                    </ul>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+                        <h4 class="font-semibold">Did You Know?</h4>
+                        <p class="mt-2">A good layer of mulch can reduce water evaporation from soil by up to 70%!</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-water text-6xl text-blue-600 mb-4"></i>
+                            <p>Water conservation is essential for sustainable farming, especially as climate change makes rainfall less predictable.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Water Conservation Slider -->
+            <div class="mt-8 bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-4">Water-Saving Methods Comparison</h4>
+                <div class="relative pt-1">
+                    <label for="water-slider" class="text-center block mb-2">Choose a water conservation method:</label>
+                    <input id="water-slider" type="range" min="1" max="4" value="1" class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer">
+                    <div class="flex justify-between text-xs mt-1">
+                        <span>Drip Irrigation</span>
+                        <span>Rainwater Harvesting</span>
+                        <span>Mulching</span>
+                        <span>Swales</span>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg mt-4 min-h-24" id="water-info">
+                    <h5 class="font-semibold">Drip Irrigation</h5>
+                    <p>Water is delivered slowly and directly to plant roots through small tubes and emitters. This can save up to 80% of water compared to sprinklers because very little is lost to evaporation.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Natural Fertilizers Section -->
+        <section id="natural-fertilizers" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Natural Fertilizers</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <h3 class="text-xl font-semibold mb-3">Natural Fertilizers from the Farm</h3>
+                    <p class="mb-4">
+                        Remember all those animals we talked about? Their waste is valuable for growing plants!
+                    </p>
+                    <p class="mb-4">
+                        Instead of using artificial fertilizers made in factories, sustainable farmers use animal manure and other natural materials to feed their soil.
+                    </p>
+                    <ul class="list-disc pl-6 mb-4 space-y-2">
+                        <li><span class="term" data-term="Composting for kids">Compost</span> - decomposed organic matter that adds nutrients to soil</li>
+                        <li><span class="term" data-term="Animal manure as fertilizer for kids">Manure</span> - animal waste that's rich in nitrogen and other nutrients</li>
+                        <li><span class="term" data-term="Worm castings fertilizer for kids">Worm castings</span> - a super-rich fertilizer produced by earthworms</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-recycle text-6xl text-green-600 mb-4"></i>
+                            <p>Natural fertilizers improve soil health over time, unlike artificial fertilizers which can damage soil with repeated use.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Element -->
+            <div class="mt-8 bg-green-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Circular Farming: Everything is Connected</h4>
+                <div id="circular-farm" class="p-4 bg-white rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg relative min-h-48 shadow-md">
+                            <h5 class="font-semibold text-center mb-2">Animals</h5>
+                            <div class="flex justify-center mb-2">
+                                <i class="fas fa-cow text-3xl text-amber-800"></i>
+                            </div>
+                            <p class="text-center">Animals produce manure</p>
+                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-green-800">
+                                <i class="fas fa-arrow-down text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg relative min-h-48 shadow-md mt-8 md:mt-0">
+                            <h5 class="font-semibold text-center mb-2">Soil</h5>
+                            <div class="flex justify-center mb-2">
+                                <i class="fas fa-seedling text-3xl text-green-600"></i>
+                            </div>
+                            <p class="text-center">Manure feeds soil and plants</p>
+                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-green-800">
+                                <i class="fas fa-arrow-down text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg relative min-h-48 shadow-md mt-8 md:mt-0">
+                            <h5 class="font-semibold text-center mb-2">Crops</h5>
+                            <div class="flex justify-center mb-2">
+                                <i class="fas fa-wheat-awn text-3xl text-amber-600"></i>
+                            </div>
+                            <p class="text-center">Crops feed animals and people</p>
+                            <div class="absolute -bottom-10 left-0 w-full text-center text-green-800">
+                                <i class="fas fa-arrow-left text-lg"></i> The cycle continues <i class="fas fa-arrow-right text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12 text-center">
+                        <p>This is called a <span class="term" data-term="Closed-loop farming systems for kids">closed-loop system</span> - where outputs from one part become inputs for another.</p>
+                        <p class="mt-2">Nothing is wasted!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pasture Raised Pork Section -->
+        <section id="pork" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Pasture Raised Pork</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <p class="mb-4">
+                        Pigs are naturally curious animals that love to root in the soil with their strong snouts. <span class="term" data-term="Pasture raised pork for kids">Pasture raised pork</span> comes from pigs that have access to open fields where they can express these natural behaviors.
+                    </p>
+                    <p class="mb-4">
+                        Unlike factory-farmed pigs that live indoors on concrete floors, pasture raised pigs can run, play, and forage for foods like nuts, grasses, roots, and insects. Farmers provide shelters to protect pigs from extreme weather and predators.
+                    </p>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4">
+                        <h4 class="font-semibold">Unique Abilities of Pigs:</h4>
+                        <ul class="list-disc pl-6 space-y-1 mt-2">
+                            <li>Using their powerful snouts to dig up roots and insects</li>
+                            <li>Helping to clear land through their natural rooting behavior</li>
+                            <li>Turning food scraps and farm byproducts into valuable protein</li>
+                            <li>Building nests when given appropriate materials</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-piggy-bank text-6xl text-pink-300 mb-4"></i>
+                            <p>Pasture raised pigs are healthier, happier, and produce meat with better flavor and nutrition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Element: Pig Behavior Quiz -->
+            <div class="mt-8 bg-pink-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-2">Test Your Knowledge: Pig Behaviors</h4>
+                <div class="bg-white p-4 rounded-lg">
+                    <div id="pig-quiz" class="space-y-4">
+                        <p>Which of these is a natural behavior for pigs?</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="option1" name="pig-behavior" class="mr-2">
+                                <label for="option1">Living alone in small spaces</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="option2" name="pig-behavior" class="mr-2">
+                                <label for="option2">Rooting in soil to find food</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="option3" name="pig-behavior" class="mr-2">
+                                <label for="option3">Eating only processed feed</label>
+                            </div>
+                        </div>
+                        <button id="check-answer" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-lg transition mt-2">
+                            Check Answer
+                        </button>
+                        <p id="quiz-feedback" class="mt-2 hidden"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fodder Production Section -->
+        <section id="fodder" class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Fodder Production</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/2">
+                    <p class="mb-4">
+                        <span class="term" data-term="Fodder farming explained for kids">Fodder</span> refers to food grown specifically for farm animals. This includes various grasses, legumes (like clover), and grains that are harvested and stored to feed animals, especially during winter or drought.
+                    </p>
+                    <p class="mb-4">
+                        Sustainable farms often grow their own fodder to reduce dependence on bought feed. They might make <span class="term" data-term="How hay is made for kids">hay</span> (dried grass) or <span class="term" data-term="Silage explained for kids">silage</span> (fermented plant material) to preserve fodder for when it's needed.
+                    </p>
+                    <p class="mb-4">
+                        <span class="term" data-term="Baling hay process for kids">Baling</span> is the process of compressing hay into compact blocks or rolls that are easier to store and transport. Farmers might grow <span class="term" data-term="Lucerne/alfalfa plant for kids">lucerne</span> (also known as alfalfa), which is a highly nutritious plant for animal feed.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <div class="bg-slate-200 p-4 rounded-lg w-full h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-seedling text-6xl text-green-600 mb-4"></i>
+                            <p>Growing fodder on the farm reduces the need to transport feed long distances and can be better for the environment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Types of Fodder -->
+            <div class="mt-8 bg-green-50 p-4 rounded-lg">
+                <h4 class="font-semibold mb-4">Common Types of Fodder</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h5 class="font-semibold text-green-600">Grasses</h5>
+                        <p>Timothy, ryegrass, and fescue are common grass types grown for animal feed.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h5 class="font-semibold text-green-600">Legumes</h5>
+                        <p>Clover, lucerne, and vetch add protein to animal diets and nitrogen to soil.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h5 class="font-semibold text-green-600">Grains</h5>
+                        <p>Oats, barley, and corn provide energy-rich feed for farm animals.</p>
+                    </div>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <!-- Summary Section -->
+        <section class="mb-12 p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">Putting It All Together</h2>
+            <p class="mb-4">
+                Sustainable and ethical farms often combine several of these practices to create balanced systems where:
+            </p>
+            <ul class="list-disc pl-6 mb-4 space-y-2">
+                <li>Animals help maintain the land</li>
+                <li>Plants feed animals and improve soil health</li>
+                <li>Waste from one part of the farm becomes a resource for another part</li>
+                <li>Natural cycles are respected and supported</li>
+            </ul>
+            <p class="mb-4">
+                This approach to farming is not only better for the environment and the animals, but it can also produce healthier food and create more resilient farm businesses.
+            </p>
+            <div class="bg-green-50 p-4 rounded-lg mt-6">
+                <h4 class="font-semibold mb-2">What You Can Do</h4>
+                <p>
+                    Even if you don't live on a farm, you can support sustainable and ethical farming by:
+                </p>
+                <ul class="list-disc pl-6 mt-2 space-y-1">
+                    <li>Learning where your food comes from</li>
+                    <li>Asking questions about how animals are raised</li>
+                    <li>Visiting local farms that follow these practices</li>
+                    <li>Growing some of your own food if possible</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+
+
+    <!-- JavaScript for interactive elements -->
+    <script>
+        // Copy to clipboard functionality for terms
+        const tooltip = document.getElementById('tooltip');
+
+        // Use event delegation to handle clicks on terms, even those added dynamically
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('term') || event.target.closest('.term')) {
+                const term = event.target.classList.contains('term') ? event.target : event.target.closest('.term');
+                const text = term.getAttribute('data-term');
+                
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        // Position the tooltip near the clicked term
+                        const rect = term.getBoundingClientRect();
+                        tooltip.style.top = `${rect.top - 40}px`;
+                        tooltip.style.left = `${rect.left + (rect.width / 2) - 100}px`;
+                        
+                        // Show the tooltip
+                        tooltip.classList.add('active');
+                        
+                        // Hide the tooltip after 2 seconds
+                        setTimeout(() => {
+                            tooltip.classList.remove('active');
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+            }
+        });
+
+        // Chicken facts interactive
+        const chickenFacts = [
+            "Chickens can recognize up to 100 different faces, including human faces!",
+            "A mother hen turns her eggs about 50 times per day to keep the yolk from sticking to the shell.",
+            "Chickens have great memories and can learn from watching others. They're actually quite intelligent birds!"
+        ];
+
+        const factButtons = document.querySelectorAll('.fact-btn');
+        const factDisplay = document.getElementById('fact-display');
+
+        factButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                factDisplay.textContent = chickenFacts[index];
+                
+                // Highlight the active button
+                factButtons.forEach(btn => btn.classList.remove('bg-amber-600'));
+                button.classList.add('bg-amber-600');
+            });
+        });
+
+        // Clickable Aquaponics System
+        const fishTank = document.getElementById('fish-tank');
+        const bioFilter = document.getElementById('bio-filter');
+        const plantBed = document.getElementById('plant-bed');
+        const aquaponicsInfo = document.getElementById('aquaponics-info');
+        
+        // Information for each component
+        const aquaponicsData = {
+            fishTank: {
+                title: "Fish Tank",
+                content: "The fish tank holds fish like tilapia or trout. As the fish eat and grow, they produce waste containing <span class=\"term\" data-term=\"Ammonia explained for kids\">ammonia</span>, which would be toxic to them in high amounts. This waste-rich water is pumped to the biofilter."
+            },
+            bioFilter: {
+                title: "Biofilter - Where the Magic Happens",
+                content: "Special bacteria in the biofilter convert toxic <span class=\"term\" data-term=\"Ammonia explained for kids\">ammonia</span> from fish waste into <span class=\"term\" data-term=\"Nitrates explained for kids\">nitrates</span>, which are excellent plant fertilizer. This natural process is called <span class=\"term\" data-term=\"Nitrification explained for kids\">nitrification</span> and is key to aquaponics."
+            },
+            plantBed: {
+                title: "Plant Growing Bed",
+                content: "Plants grow in the water that now contains <span class=\"term\" data-term=\"Nitrates explained for kids\">nitrates</span>. Their roots filter these nutrients out of the water as they grow. The clean water can then be returned to the fish tank, completing the cycle."
+            }
+        };
+        
+        // Add event listeners to clickable components
+        fishTank.addEventListener('click', () => {
+            highlightComponent(fishTank);
+            updateAquaponicsInfo(aquaponicsData.fishTank);
+        });
+        
+        bioFilter.addEventListener('click', () => {
+            highlightComponent(bioFilter);
+            updateAquaponicsInfo(aquaponicsData.bioFilter);
+        });
+        
+        plantBed.addEventListener('click', () => {
+            highlightComponent(plantBed);
+            updateAquaponicsInfo(aquaponicsData.plantBed);
+        });
+        
+        // Helper functions
+        function highlightComponent(component) {
+            // Reset all components
+            [fishTank, bioFilter, plantBed].forEach(el => {
+                el.style.transform = 'scale(1)';
+                el.style.boxShadow = 'none';
+            });
+            
+            // Highlight selected component
+            component.style.transform = 'scale(1.05)';
+            component.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+        }
+        
+        function updateAquaponicsInfo(data) {
+            aquaponicsInfo.innerHTML = `
+                <h5 class="font-semibold">${data.title}</h5>
+                <p class="mt-2">${data.content}</p>
+            `;
+        }
+
+        // Rotational grazing demonstration
+        const paddocks = document.querySelectorAll('.paddock');
+        const rotateCattle = document.getElementById('rotate-cattle');
+        const grazingInfo = document.getElementById('grazing-info');
+        let currentPaddock = -1;
+        let grazingCycle = 0;
+
+        // Initialize paddocks
+        paddocks.forEach((paddock, index) => {
+            paddock.style.position = 'relative';
+            paddock.innerHTML = `<div class="grass h-full w-full absolute top-0 left-0 bg-green-300 rounded"></div>`;
+        });
+
+        rotateCattle.addEventListener('click', () => {
+            // Reset all paddocks to full grass if starting new cycle
+            if (currentPaddock === -1 || currentPaddock === paddocks.length - 1) {
+                paddocks.forEach(paddock => {
+                    const grass = paddock.querySelector('.grass');
+                    grass.style.height = '100%';
+                    grass.style.backgroundColor = '#86efac'; // green-300
+                });
+                currentPaddock = 0;
+                grazingCycle++;
+                grazingInfo.textContent = `Cycle ${grazingCycle}: Moving cattle to paddock 1`;
+            } else {
+                currentPaddock++;
+                grazingInfo.textContent = `Cycle ${grazingCycle}: Moving cattle to paddock ${currentPaddock + 1}`;
+            }
+
+            // Add cattle to current paddock and "eat" grass
+            paddocks.forEach((paddock, index) => {
+                const grass = paddock.querySelector('.grass');
+                
+                if (index === currentPaddock) {
+                    // Add cattle icon
+                    paddock.innerHTML += `<i class="fas fa-cow text-2xl text-amber-800 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>`;
+                    
+                    // Reduce grass height to simulate grazing
+                    grass.style.height = '30%';
+                    grass.style.backgroundColor = '#d9f99d'; // lime-200
+                } else {
+                    // Remove cattle icon if present
+                    const cattle = paddock.querySelector('.fa-cow');
+                    if (cattle) paddock.removeChild(cattle);
+                    
+                    // If this paddock was grazed earlier in the cycle, slowly regrow
+                    if (index < currentPaddock) {
+                        const growthStage = (currentPaddock - index) / paddocks.length;
+                        grass.style.height = `${30 + (growthStage * 70)}%`;
+                        
+                        // Change color based on regrowth
+                        if (growthStage > 0.7) {
+                            grass.style.backgroundColor = '#86efac'; // green-300
+                        } else if (growthStage > 0.3) {
+                            grass.style.backgroundColor = '#bbf7d0'; // green-200
+                        } else {
+                            grass.style.backgroundColor = '#d9f99d'; // lime-200
+                        }
+                    }
+                }
+            });
+        });
+
+        // Pig Quiz
+        const checkAnswer = document.getElementById('check-answer');
+        const quizFeedback = document.getElementById('quiz-feedback');
+
+        checkAnswer.addEventListener('click', () => {
+            const selectedOption = document.querySelector('input[name="pig-behavior"]:checked');
+            quizFeedback.classList.remove('hidden');
+            
+            if (!selectedOption) {
+                quizFeedback.textContent = "Please select an answer.";
+                quizFeedback.className = "mt-2 text-yellow-600";
+                return;
+            }
+
+            if (selectedOption.id === 'option2') {
+                quizFeedback.textContent = "Correct! Pigs naturally root in soil to find food like roots, insects, and fallen fruits.";
+                quizFeedback.className = "mt-2 text-green-600";
+            } else {
+                quizFeedback.textContent = "Not quite. Pigs are social animals that naturally root in soil to find food.";
+                quizFeedback.className = "mt-2 text-red-600";
+            }
+        });
+
+        // Seasonal Fodder Calendar
+        const seasonButtons = document.querySelectorAll('.season-btn');
+        const seasonInfo = document.getElementById('season-info');
+        const seasonData = {
+            spring: "In spring, farmers plant new fodder crops and prepare pastures. Young grass is growing quickly, providing nutritious grazing for animals.",
+            summer: "Summer is harvest time for hay and silage. Farmers cut grass at its peak nutrition and dry it in the sun before baling it for storage.",
+            autumn: "In autumn, farmers might plant winter cover crops for soil protection. This is also when many prepare for the final harvest before winter.",
+            winter: "During winter, animals eat the stored hay and silage. Farmers plan for next year's fodder production and repair equipment."
+        };
+
+        seasonButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const season = button.getAttribute('data-season');
+                seasonInfo.textContent = seasonData[season];
+                
+                // Highlight active season button
+                seasonButtons.forEach(btn => {
+                    btn.style.fontWeight = 'normal';
+                    btn.style.transform = 'scale(1)';
+                });
+                button.style.fontWeight = 'bold';
+                button.style.transform = 'scale(1.05)';
+            });
+        });
+        
+        // Water conservation slider
+        const waterSlider = document.getElementById('water-slider');
+        const waterInfo = document.getElementById('water-info');
+        
+        // Water conservation methods information
+        const waterMethods = [
+            {
+                title: "Drip Irrigation",
+                description: "Water is delivered slowly and directly to plant roots through small tubes and emitters. This can save up to 80% of water compared to sprinklers because very little is lost to evaporation."
+            },
+            {
+                title: "Rainwater Harvesting",
+                description: "Collecting rainwater from roofs and other surfaces into tanks or barrels. This water can be used for crops during dry periods, reducing the need to use groundwater or treated water supplies."
+            },
+            {
+                title: "Mulching",
+                description: "Covering the soil around plants with materials like straw, wood chips, or leaves. This slows water evaporation, keeps soil cooler, and helps prevent weeds that would compete for water."
+            },
+            {
+                title: "Swales",
+                description: "Shallow channels dug along the contour of sloped land to catch rainwater and allow it to soak into the ground slowly. Swales help prevent runoff and erosion while increasing groundwater recharge."
+            }
+        ];
+        
+        // Update water conservation information when slider changes
+        waterSlider.addEventListener('input', () => {
+            const methodIndex = parseInt(waterSlider.value) - 1;
+            const method = waterMethods[methodIndex];
+            
+            waterInfo.innerHTML = `
+                <h5 class="font-semibold">${method.title}</h5>
+                <p>${method.description}</p>
+            `;
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
