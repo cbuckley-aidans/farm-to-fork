@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Food Production</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Custom styles for this specific lesson */
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        /* Fix for element-card styling to ensure consistency */
+        .element-card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(0);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Reduced padding in card headers */
+        .element-header {
+            background-color: var(--secondary-bg);
+            padding: 10px 20px; /* Reduced padding */
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--outline-color);
+        }
+        
+        .element-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .element-content {
+            padding: 20px 25px;
+            color: var(--text-color);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .element-content ul {
+            list-style-type: none;
+            margin: 15px 0 0;
+            padding: 0;
+        }
+        
+        .element-content ul li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .element-content ul li::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: var(--accent-color);
+            font-size: 1.2em;
+        }
+        
+        /* Comparison container for benefits/drawbacks */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .ranking-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            cursor: grab;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+        }
+        
+        .ranking-item:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .ranking-item.dragging {
+            opacity: 0.8;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .ranking-item .food-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent-bg);
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid var(--outline-color);
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+        
+        .ranking-item .handle {
+            margin-right: 15px;
+            color: var(--accent-color);
+            cursor: grab;
+        }
+        
+        .ranking-number {
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .question-card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .question-card:hover {
+            transform: translateY(-0.15em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .question-card h4 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-card h4 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+        
+        .question-card.active h4 i {
+            transform: rotate(90deg);
+        }
+        
+        .question-card .question-answer {
+            display: none;
+            padding-top: 10px;
+            border-top: 1px solid var(--outline-color);
+            margin-top: 10px;
+        }
+        
+        .question-card.active .question-answer {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .fertilizer-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .fertilizer-method {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .fertilizer-method:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .fertilizer-method-header {
+            background-color: var(--secondary-bg);
+            padding: 10px 15px; /* Reduced padding */
+            border-bottom: 2px solid var(--outline-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .fertilizer-method-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .fertilizer-method-content {
+            padding: 15px;
+            flex-grow: 1;
+        }
+        
+        .fertilizer-method-footer {
+            padding: 10px 15px;
+            border-top: 1px solid var(--outline-color);
+            background-color: var(--accent-bg);
+            display: flex;
+            justify-content: center;
+        }
+        
+        .fertilizer-method-footer button {
+            padding: 8px 12px;
+            border: 1.5px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            background-color: var(--primary-bg);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .fertilizer-method-footer button:hover {
+            transform: translateY(-0.15em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .fertilizer-method-footer button.clicked {
+            background-color: var(--good-color);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .fertilizer-header {
+            padding-top: 40px;
+            margin-top: 20px;
+        }
+        
+        .hidden-content {
+            display: none;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-top: 15px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .hidden-content.active {
+            display: block;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        
+        .checklist-item.checked {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .flytrap-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            max-width: 700px;
+        }
+        
+        .flytrap-container:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .flytrap-img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border: 2px solid var(--outline-color);
+        }
+        
+        .flytrap-info {
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .flytrap-info h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        
+        .nitrogen-cycle {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .secret-code-container {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .secret-code-input {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .secret-code-input input {
+            padding: 10px 15px;
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            width: 200px;
+        }
+        
+        .check-answer-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .check-answer-btn:hover {
+            transform: translateY(-0.15em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .correct {
+            border-color: var(--good-color) !important;
+            background-color: rgba(82, 196, 26, 0.1);
+        }
+        
+        .incorrect {
+            border-color: var(--bad-color) !important;
+            background-color: rgba(255, 77, 79, 0.1);
+        }
+        
+        .ranking-feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            display: none;
+            font-weight: 600;
+        }
+        
+        .ranking-feedback.show-feedback {
+            display: block;
+        }
+        
+        .correct-feedback {
+            background-color: rgba(82, 196, 26, 0.1);
+            color: var(--good-color);
+            border: 1px solid var(--good-color);
+        }
+        
+        .incorrect-feedback {
+            background-color: rgba(255, 77, 79, 0.1);
+            color: var(--bad-color);
+            border: 1px solid var(--bad-color);
+        }
+        
+        /* Fixed Tooltip styles */
+        .tooltip {
+            position: fixed;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            font-size: 14px;
+            max-width: 250px;
+            text-align: center;
+        }
+        
+        .tooltip.show {
+            opacity: 1;
+        }
+        
+        /* Split content fix */
+        .split-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 20px 0;
+        }
+        
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--outline-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+        }
+        
+        .carousel-container:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .carousel-slide {
+            display: none;
+            width: 100%;
+        }
+        
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 12px 15px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            z-index: 10;
+        }
+        
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .prev-btn {
+            left: 10px;
+        }
+        
+        .next-btn {
+            right: 10px;
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .dot.active {
+            background-color: var(--accent-color);
+        }
+
+        /* Update these CSS rules in the carousel styles section */
+
+/* Fixed height carousel container */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 450px; /* Fixed height for the carousel */
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--outline-color);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-time), box-shadow var(--transition-time);
+}
+
+/* Make slides take full height */
+.carousel-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Make images cover the slide area uniformly */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* This ensures the image covers the area without distortion */
+    object-position: center; /* Centers the image */
+}
+
+/* Adjust the carousel dots position to account for the fixed height */
+.carousel-dots {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+/* Chart Styles */
+.food-chart-container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: var(--primary-bg);
+        border: 2px solid var(--outline-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-sm);
+        transition: transform var(--transition-time), box-shadow var(--transition-time);
+    }
+    
+    .food-chart-container:hover {
+        transform: translateY(-0.25em);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .food-chart {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .chart-labels {
+        flex: 0 0 150px;
+        text-align: right;
+        font-weight: 500;
+        font-size: 0.9em;
+    }
+    
+    .chart-label {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 10px;
+    }
+    
+    .chart-bars {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .chart-bar-container {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    
+    .chart-bar {
+        height: 28px;
+        background-color: var(--accent-color);
+        border: 2px solid var(--outline-color);
+        border-radius: var(--border-radius);
+        transition: transform 0.2s;
+        position: relative;
+    }
+    
+    .chart-bar:hover {
+        transform: scaleY(1.1);
+    }
+    
+    .chart-value {
+        position: absolute;
+        right: 10px;
+        color: white;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    
+    .chart-change {
+        position: absolute;
+        left: calc(100% + 10px);
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    
+    .chart-change.negative {
+        color: var(--bad-color);
+    }
+    
+    .chart-change.positive {
+        color: var(--good-color);
+    }
+    
+    .chart-legend {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9em;
+    }
+    
+    .legend-color {
+        width: 20px;
+        height: 20px;
+        background-color: var(--accent-color);
+        border: 1.5px solid var(--outline-color);
+        border-radius: 4px;
+    }
+    
+    .legend-change {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.8em;
+    }
+    
+    .legend-change.negative:after {
+        content: "−";
+        color: var(--bad-color);
+        font-size: 1.5em;
+    }
+    
+    @media (max-width: 768px) {
+        .food-chart {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .chart-labels {
+            flex: none;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .chart-label {
+            justify-content: flex-start;
+            padding-left: 5px;
+            margin-bottom: 5px;
+            height: auto;
+        }
+        
+        .chart-bar-container {
+            margin-bottom: 15px;
+        }
+        
+        .chart-value {
+            right: 5px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">SUSTAINABLE FOOD PRODUCTION</div>
+        <div class="sidebar-nav">
+            <!-- Tab navigation buttons -->
+            <button class="tab-button active" data-tab="overview">
+                <i class="fas fa-info-circle"></i>
+                LI / SC
+            </button>
+            <button class="tab-button" data-tab="activity1">
+                <i class="fa-solid fa-recycle"></i>
+                SUSTAINABILITY
+            </button>
+            <button class="tab-button" data-tab="activity2">
+                <i class="fas fa-seedling"></i>
+                FERTILISERS
+            </button>
+            <button class="tab-button" data-tab="activity3">
+                <i class="fa-solid fa-clipboard-list"></i>
+                ACTIVITY
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Overview Content -->
+        <div id="overview" class="tab-content active">
+            <div class="light-section">
+                <h1>Sustainable Food Production</h1>
+                <h2>Learning Intentions & Success Criteria</h2>
+                
+                <div class="card">
+                    <h3>LEARNING INTENTIONS</h3>
+                    <p>By the end of this lesson, you will:</p>
+                    <ul>
+                        <li>Understand the scale and environmental impact of food production</li>
+                        <li>Be able to rank food items based on their sustainability</li>
+                        <li>Explain how plants obtain nutrients and why fertilizers are used</li>
+                        <li>Understand the difference between whole and processed foods</li>
+                        <li>Compare artificial versus sustainable fertilisation methods</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>SUCCESS CRITERIA</h3>
+                    <p>You will be successful when you can:</p>
+                    <ul>
+                        <li>Correctly rank common food items from most to least sustainable</li>
+                        <li>Describe why the venus fly trap catches flies</li>
+                        <li>Explain at least three benefits and three drawbacks of artificial fertilizers</li>
+                        <li>Research a sustainable fertilisation technique</li>
+                        <li>Utilise your learning and research for your assessment</li>
+                    </ul>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <!-- Activity 1 Content -->
+        <div id="activity1" class="tab-content">
+            <div class="light-section">
+                <h2>ACTIVITY: RANKING FOOD SUSTAINABILITY</h2>
+                
+                
+                
+                <!-- New Factory Farming Images Carousel -->
+                <div class="card">
+                    <h3>FACTORY FARMING IMAGES</h3>
+                    <p>Look at some of these images of food producers. These would be described as "mass production", or "factory farming" style farms or production centres.</p>
+                    
+                    <div class="carousel-container">
+                        <div class="carousel-slide">
+                            <img src="https://assets.farmsanctuary.org/content/uploads/2020/07/27050130/Broilers_Sweden_JMcArthur_2012-5948-1600x1065.jpg" alt="Factory Farm - Chickens">
+                            <div class="carousel-caption">Industrial poultry farming with thousands of chickens</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://d3i6fh83elv35t.cloudfront.net/static/2020/02/2018-10-26T111651Z_1199374706_RC1AC96666C0_RTRMADP_3_USA-TRADE-CHINA-HOGS-768x512.jpg" alt="Factory Farm - Pigs">
+                            <div class="carousel-caption">Large-scale pig farming operation</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://www.nrdc.org/sites/default/files/styles/medium_100/public/media-uploads/istock-609035672_2400.jpg.jpg?itok=NzDotL5y" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Mass production applies to crops too!</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://agspec.net/wp-content/uploads/2018/01/Crop-research-pic-2-2-1.jpg" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Many mass production farms will use chemicals to ensure they lose as little plants as possible.</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://d2evkimvhatqav.cloudfront.net/images/Resources/knowledge-library/worker-at-food-production-line-in-baking-factory_675023057.jpg?v=1740058618" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Factories where food might be processed and packaged.</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://www.foodengineeringmag.com/ext/resources/Issues/2022/07-July/GettyImages-171319596.jpg?1656617102" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Factories where food might be processed and packaged.</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://i.ytimg.com/vi/JU64_dBmzds/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDd8SXWmiL3J4r53Bjw_ZR6ns1slw" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Factories where food might be processed and packaged.</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.justwatch.com/backdrop/241143314/s640/food-factory-ca" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Factories where food might be processed and packaged.</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://d2evkimvhatqav.cloudfront.net/images/Resources/knowledge-library/worker-at-food-production-line-in-baking-factory_675023057.jpg?v=1740058618" alt="Factory Farm - Cattle">
+                            <div class="carousel-caption">Factories where food might be processed and packaged.</div>
+                        </div>
+                        
+                        <button class="carousel-btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="carousel-dots">
+                            <span class="dot active" data-slide="0"></span>
+                            <span class="dot" data-slide="1"></span>
+                            <span class="dot" data-slide="2"></span>
+                            <span class="dot" data-slide="3"></span>
+                            <span class="dot" data-slide="4"></span>
+                            <span class="dot" data-slide="5"></span>
+                            <span class="dot" data-slide="6"></span>
+                            <span class="dot" data-slide="7"></span>
+                            <span class="dot" data-slide="8"></span>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <h3>THINKING QUESTIONS</h3>
+                <div class="card">
+                    <p>Why do you think we need to farm on this scale?</p>
+                    <p>Before opening the next section, turn to the person next to you and guess: <strong>How much food do you think an average person eats in a day?</strong></p>
+
+
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> Reveal this answer after you've made a guess!</h4>
+                        <div class="question-answer">
+                            <p>Think about all the meals and snacks you eat in a day. An average person consumes about 1.5-2 kg of food daily. How much would that be for your classroom? Your whole school? Your whole city?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> Why might we need mass production to feed everyone?</h4>
+                        <div class="question-answer">
+                            <p>Consider population size, how many people live in cities vs. rural areas, and how many people grow their own food. What challenges do we face in feeding everyone on the planet?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+                <!-- Food Intake Chart -->
+<div class="card" style="margin-top: 20px;">
+    <h3>DAILY FOOD INTAKE VISUALIZATION</h3>
+    <p>This was the daily consumption of different food groups in Australia in 2022-2023.</p>
+    <p><strong>Hover over the bars to see the amount of grams in each food group.</p></strong>
+
+    <div class="food-chart-container">
+        <div class="food-chart">
+            <div class="chart-labels">
+                <div class="chart-label">Vegetable products</div>
+                <div class="chart-label">Fruit products</div>
+                <div class="chart-label">Milk products</div>
+                <div class="chart-label">Non-alcoholic beverages</div>
+                <div class="chart-label">Cereal products</div>
+                <div class="chart-label">Meat and poultry products</div>
+            </div>
+            
+            <div class="chart-bars">
+                <div class="chart-bar-container">
+                    <div class="chart-bar" style="width: 41%;" data-value="186" data-change="-14"></div>
+                    <span class="chart-value">186g</span>
+                </div>
+                <div class="chart-bar-container">
+                    <div class="chart-bar" style="width: 31%;" data-value="138" data-change="-12"></div>
+                    <span class="chart-value">138g</span>
+                </div>
+                <div class="chart-bar-container">
+                    <div class="chart-bar" style="width: 59%;" data-value="267" data-change="-11"></div>
+                    <span class="chart-value">267g</span>
+                </div>
+                <div class="chart-bar-container">
+                    <div class="chart-bar" style="width: 89%;" data-value="400" data-change="-8.9"></div>
+                    <span class="chart-value">400g</span>
+                </div>
+                <div class="chart-bar-container">
+                    <div class="chart-bar" style="width: 29%;" data-value="129" data-change="-3.7"></div>
+                    <span class="chart-value">129g</span>
+                </div>
+                <div class="chart-bar-container">
+                    <div class="chart-bar" style="width: 33%;" data-value="147" data-change="-2.5"></div>
+                    <span class="chart-value">147g</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-legend">
+            <div class="legend-item">
+                <div class="legend-color"></div>
+                <div class="legend-text">Current daily intake (grams per capita)</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-change negative"></div>
+                <div class="legend-text">Recent change (grams)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chicken Nugget Manufacturing Section -->
+<h3>HOW FOOD IS MASS PRODUCED</h3>
+<div class="card">
+    <p>Some foods need to have some work done before they are ready for our plates.</p>
+    <p>Let's watch an American video on how chicken McNuggets are produced.</p>
+    
+    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; margin-top: 15px; margin-bottom: 20px;">
+        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--border-radius); border: 2px solid var(--outline-color);" src="https://www.youtube.com/embed/NCm6INQ09yY" title="How McDonald's Chicken Nuggets Are Made" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <h4>CRITICAL THINKING POINTS</h4>
+    <p>As you watch this video, keep these points in mind:</p>
+    <ul>
+        <li>Be critical about this source, as it is made by McDonald's to improve their branding</li>
+        <li>This is an American source and may not reflect practices in other countries like Australia</li>
+        <li>Think about the parts of the chicken that are not used, and the waste generated</li>
+        <li>How are the nuggets packaged and given to the customer? How much waste is involved in the packaging?</li>
+        <li>Would most factories have people manually cutting the chickens, or would this be automated?</li>
+    </ul>
+    
+    <div class="question-card">
+        <h4><i class="fas fa-chevron-right"></i> What did you notice about this food production process?</h4>
+        <div class="question-answer">
+            <p>Consider:</p>
+            <ul>
+                <li>The scale of production (how many chickens per day)</li>
+                <li>The energy required to run the facility</li>
+                <li>The resources needed for packaging</li>
+                <li>How the final product differs from whole chicken meat</li>
+                <li>Whether this influences your perception of fast food</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Whole vs Processed Foods Section -->
+<h3>WHOLE VS PROCESSED FOODS</h3>
+<div class="card">
+    <p class="intro-paragraph">It's important to understand the difference between whole foods and processed foods. Processing foods doesn't only change the health value of the ingredients, but it often requires additional resources and energy.</p>
+    
+    <div style="display: flex; justify-content: center; margin: 20px 0;">
+        <div style="max-width: 600px; border: 2px solid var(--outline-color); border-radius: var(--border-radius); overflow: hidden;">
+            <img src="https://lh3.googleusercontent.com/ahea55baod5u-dJgsCfkbTcNr5nTPl9krIM4It-mx30mtc3BbIpq_bYGWbyxgC_s3Id9-divt488yqR-XkIbFw=s800" alt="Whole vs Processed Foods Comparison" style="width: 100%; display: block;">
+        </div>
+    </div>
+    
+    
+    <!-- Custom food type boxes instead of using the default card classes -->
+    <div style="display: flex; gap: 25px; margin-top: 30px;">
+        <!-- Custom Whole Foods Box -->
+        <div style="flex: 1; border: 2px solid var(--outline-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform var(--transition-time), box-shadow var(--transition-time); background-color: var(--primary-bg);">
+            <!-- Custom Header -->
+            <div style="display: flex; align-items: center; background-color: var(--secondary-bg); padding: 8px 10px; border-bottom: 2px solid var(--outline-color);">
+                <!-- Icon Circle -->
+                <div style="width: 28px; height: 28px; background-color: #002654; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 0.8rem;">
+                    <i class="fas fa-carrot"></i>
+                </div>
+                <!-- Title -->
+                <h3 style="margin: 0; padding: 0; font-size: 1em;">WHOLE FOODS</h3>
+            </div>
+            
+            <!-- Content -->
+            <div style="padding: 15px;">
+                <p>Whole foods are foods that remain close to their natural state with minimal processing.</p>
+                <ul>
+                    <li>Fresh fruits and vegetables</li>
+                    <li>Whole grains (brown rice, oats)</li>
+                    <li>Beans and legumes</li>
+                    <li>Nuts and seeds</li>
+                    <li>Fresh meat, poultry, and fish</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Benefits:</strong> Higher nutrient content, fewer additives, often requires less energy to produce, usually less packaging</p>
+            </div>
+        </div>
+        
+        <!-- Custom Processed Foods Box -->
+        <div style="flex: 1; border: 2px solid var(--outline-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform var(--transition-time), box-shadow var(--transition-time); background-color: var(--primary-bg);">
+            <!-- Custom Header -->
+            <div style="display: flex; align-items: center; background-color: var(--secondary-bg); padding: 8px 10px; border-bottom: 2px solid var(--outline-color);">
+                <!-- Icon Circle -->
+                <div style="width: 28px; height: 28px; background-color: #002654; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 0.8rem;">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+                <!-- Title -->
+                <h3 style="margin: 0; padding: 0; font-size: 1em;">PROCESSED FOODS</h3>
+            </div>
+            
+            <!-- Content -->
+            <div style="padding: 15px;">
+                <p>Processed foods have been altered from their natural state through various manufacturing methods.</p>
+                <ul>
+                    <li>Fast food (burgers, nuggets)</li>
+                    <li>Packaged snacks and cookies</li>
+                    <li>Breakfast cereals</li>
+                    <li>Frozen meals</li>
+                    <li>Canned foods with additives</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Impact:</strong> Additional processing steps, more energy use, more packaging, transportation between processing facilities</p>
+            </div>
+        </div>
+    </div>
+    
+    <h4 style="margin-top: 30px;">ENVIRONMENTAL IMPACT OF FOOD PROCESSING</h4>
+    <p>Food processing can significantly affect the environmental footprint of what we eat:</p>
+    
+    <div class="steps-container" style="margin-top: 20px;">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div>
+                <h3>Energy Use</h3>
+                <p>Processing facilities require electricity for machines, heating, cooling, and packaging, increasing the carbon footprint.</p>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div>
+                <h3>Water Consumption</h3>
+                <p>Many processing techniques use significant amounts of water for washing, cooking, cooling, and cleaning equipment.</p>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div>
+                <h3>Packaging Waste</h3>
+                <p>Processed foods typically require more packaging, which often ends up in landfills or polluting oceans.</p>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <div>
+                <h3>Transportation</h3>
+                <p>Ingredients may travel to multiple facilities before becoming the final product, increasing fuel use and emissions.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="question-card" style="margin-top: 25px;">
+        <h4><i class="fas fa-chevron-right"></i> Looking at your own diet, what proportion is whole foods versus processed foods?</h4>
+        <div class="question-answer">
+            <p>Think about your last few meals:</p>
+            <ul>
+                <li>Which items were whole foods that you could recognize in their natural form?</li>
+                <li>Which items underwent significant processing before reaching you?</li>
+                <li>How many ingredients were in each processed food item?</li>
+                <li>How much packaging waste was generated?</li>
+                <li>Could any processed foods be replaced with whole food alternatives?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+                
+                <h3>FOOD SUSTAINABILITY RANKING</h3>
+                <div class="card">
+                    <p>Not every calorie we use to fuel our bodies has the same amount of effort put into growing it.</p>
+                    <p>Some foods take much more water, fuel, fertiliser, and resources to grow. This all has an impact on our planet.</p>
+
+                    <p><strong>Drag the food items below to rank them from most sustainable (top) to least sustainable (bottom).</p></strong>
+                    
+                    <div class="ranking-container" id="food-ranking">
+                        <div class="ranking-item" draggable="true" data-id="1">
+                            <div class="handle"><i class="fas fa-grip-lines"></i></div>
+                            <div class="ranking-number">?</div>
+                            <div class="food-icon"><i class="fas fa-drumstick-bite"></i></div>
+                            <div>
+                                <strong>Beef</strong>
+                                <p>Red meat from cattle</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item" draggable="true" data-id="2">
+                            <div class="handle"><i class="fas fa-grip-lines"></i></div>
+                            <div class="ranking-number">?</div>
+                            <div class="food-icon"><i class="fas fa-egg"></i></div>
+                            <div>
+                                <strong>Chicken</strong>
+                                <p>Poultry meat</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item" draggable="true" data-id="3">
+                            <div class="handle"><i class="fas fa-grip-lines"></i></div>
+                            <div class="ranking-number">?</div>
+                            <div class="food-icon"><i class="fas fa-bowl-rice"></i></div>
+                            <div>
+                                <strong>Rice</strong>
+                                <p>Cereal grain</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item" draggable="true" data-id="4">
+                            <div class="handle"><i class="fas fa-grip-lines"></i></div>
+                            <div class="ranking-number">?</div>
+                            <div class="food-icon"><i class="fas fa-seedling"></i></div>
+                            <div>
+                                <strong>Lentils</strong>
+                                <p>Pulse/legume</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item" draggable="true" data-id="5">
+                            <div class="handle"><i class="fas fa-grip-lines"></i></div>
+                            <div class="ranking-number">?</div>
+                            <div class="food-icon"><i class="fas fa-leaf"></i></div>
+                            <div>
+                                <strong>Leafy Greens</strong>
+                                <p>Vegetables like spinach, kale</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item" draggable="true" data-id="6">
+                            <div class="handle"><i class="fas fa-grip-lines"></i></div>
+                            <div class="ranking-number">?</div>
+                            <div class="food-icon"><i class="fas fa-apple-alt"></i></div>
+                            <div>
+                                <strong>Avocado</strong>
+                                <p>High-fat fruit</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="secret-code-container">
+                        <h3>CHECK YOUR ANSWER</h3>
+                        <p>Enter the secret code your teacher gave you to check if your ranking is correct:</p>
+                        <div class="secret-code-input">
+                            <input type="text" id="secret-code" placeholder="Enter secret code">
+                            <button id="check-ranking" class="check-answer-btn">Check Answer</button>
+                        </div>
+                        <div id="ranking-feedback" class="ranking-feedback"></div>
+                    </div>
+                </div>
+                
+                <h3>DISCUSSION QUESTIONS</h3>
+                <div class="card">
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> What factors influenced your ranking?</h4>
+                        <div class="question-answer">
+                            <p>Consider these points in your discussion:</p>
+                            <ul>
+                                <li>Water usage (beef requires ~15,000L/kg while vegetables need ~300L/kg)</li>
+                                <li>Land requirements and potential deforestation</li>
+                                <li>Energy needed for production, processing, and transportation</li>
+                                <li>Greenhouse gas emissions from production</li>
+                                <li>Packaging waste and transportation impacts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> How might consumer choices impact food production?</h4>
+                        <div class="question-answer">
+                            <p>Think about:</p>
+                            <ul>
+                                <li>How your food choices affect what farmers grow</li>
+                                <li>Whether people are willing to pay more for sustainable foods</li>
+                                <li>How food trends affect farming methods</li>
+                                <li>Why farmers might choose profit over sustainability</li>
+                                <li>What would happen if everyone changed to more plant-based diets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 2 Content -->
+        <div id="activity2" class="tab-content">
+            <div class="dark-section">
+                <h2>ACTIVITY: VENUS FLY TRAP & NITROGEN</h2>
+                
+               
+                
+                <h3>THE VENUS FLY TRAP</h3>
+                <div class="flytrap-container">
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--border-radius); border: 2px solid var(--outline-color);" src="https://www.youtube.com/embed/O7eQKSf0LmY" title="Venus Fly Trap Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    
+                    <div class="flytrap-info">
+                        <h4>Venus Fly Trap Adaptation</h4>
+                        <p>The Venus fly trap (Dionaea muscipula) is a carnivorous plant native to the wetlands of North and South Carolina. It grows in nitrogen-poor, acidic soil where most plants cannot thrive. To compensate for the lack of nutrients in its environment, it has evolved specialized leaves that can trap insects, which it then digests to extract nitrogen and other nutrients.</p>
+                        <p>This amazing adaptation shows how plants can develop unique solutions to nutrient problems - the same problems farmers face when growing crops!</p>
+                    </div>
+                </div>
+                
+                <h3>THINKING QUESTION</h3>
+                <div class="card">
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> Why does the Venus fly trap need to catch insects, and how does this relate to our crops?</h4>
+                        <div class="question-answer">
+                            <p>Think about:</p>
+                            <ul>
+                                <li>Why all plants need nitrogen to grow</li>
+                                <li>How most plants get nitrogen from the soil</li>
+                                <li>Why farm crops need lots of nitrogen</li>
+                                <li>How natural ecosystems cycle nutrients without human help</li>
+                                <li>What happens when we disrupt these natural cycles in farming</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>ARTIFICIAL FERTILISATION</h3>
+                <div class="card">
+                    <div class="nitrogen-cycle">
+                        <img src="https://www.milorganite.com/application/files/5915/8111/0395/OrgSynth750x270-min.jpg" alt="Nitrogen Cycle and Fertilizers" style="width: 100%; border-radius: var(--border-radius); border: 2px solid var(--outline-color); margin-bottom: 15px;">
+                        <p>This diagram shows the differences between organic and synthetic fertilisers.</p>
+                        <p>Synthetic fertilisers are a short-term shortcut that can result in long-term negative impacts to the soil.</p>
+
+                    </div>
+                    
+                    <!-- Improved Benefits and Drawbacks section using element-card structure -->
+                    <div class="comparison-container">
+                        <div class="element-card">
+                            <div class="element-header">
+                                <div class="element-number"><i class="fas fa-plus"></i></div>
+                                <h3>BENEFITS</h3>
+                            </div>
+                            <div class="element-content">
+                                <ul>
+                                    <li>Plants can use nutrients immediately</li>
+                                    <li>Crops grow faster and produce more food</li>
+                                    <li>Farmers can adjust exactly what nutrients to add</li>
+                                    <li>More affordable for large farms</li>
+                                    <li>Easy to apply evenly across fields</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="element-card">
+                            <div class="element-header">
+                                <div class="element-number"><i class="fas fa-minus"></i></div>
+                                <h3>DRAWBACKS</h3>
+                            </div>
+                            <div class="element-content">
+                                <ul>
+                                    <li>Can damage soil structure and kill helpful organisms</li>
+                                    <li>Excess fertilizer washes into rivers and lakes</li>
+                                    <li>Soil becomes less fertile over many years</li>
+                                    <li>Takes lots of energy to manufacture</li>
+                                    <li>Can lead to soil erosion and carbon loss</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin-top: 30px;">VIDEO: THE IMPACT OF ARTIFICIAL FERTILIZERS</h4>
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; margin-top: 15px;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--border-radius); border: 2px solid var(--outline-color);" src="https://www.youtube.com/embed/iefrp5ooQSQ" title="Artificial Fertilizers" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <h3>THINKING QUESTIONS</h3>
+                <div class="card">
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> What might happen to our soils if we rely on artificial fertilisers year after year?</h4>
+                        <div class="question-answer">
+                            <p>Consider:</p>
+                            <ul>
+                                <li>How soil structure might change over time</li>
+                                <li>What happens to beneficial soil microorganisms</li>
+                                <li>Whether the soil can maintain its natural nutrient cycling</li>
+                                <li>If farmers become dependent on adding more fertilizer each year</li>
+                                <li>How soil health affects a farm's ability to withstand drought or flooding</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <h4><i class="fas fa-chevron-right"></i> How does this impact the sustainability of our food production?</h4>
+                        <div class="question-answer">
+                            <p>Consider:</p>
+                            <ul>
+                                <li>Economic impacts: Do farmers need to buy more fertilizer over time?</li>
+                                <li>Environmental impacts: What happens to nearby water and wildlife?</li>
+                                <li>Future concerns: Will we always have the resources to make fertilizers?</li>
+                                <li>Climate adaptation: Can these farming systems handle changing weather?</li>
+                                <li>Community impacts: How do these farming practices affect rural areas?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 3 Content -->
+        <div id="activity3" class="tab-content">
+            <div class="light-section">
+                <h2>ACTIVITY: SUSTAINABLE FERTILISATION ALTERNATIVES</h2>
+                
+                
+                
+                <h3 class="fertilizer-header">SUSTAINABLE FERTILISATION METHODS</h3>
+                <div class="card">
+                    <p>Choose one of the sustainable fertilization methods below to research further. Click the "Learn More" button to copy the topic to your clipboard, then find more information about it.</p>
+                    <p><strong>You may wish to reflect on which of these techniques you could use in your farm project.</strong></p>
+                    <p><strong>You can also re-use this research for the last slide of your assessment, which asks you about what you've learned about sustainable food production.</strong></p>
+                </div>
+                
+                <div class="fertilizer-methods">
+                    <!-- Method 1 -->
+                    <div class="fertilizer-method">
+                        <div class="fertilizer-method-header">
+                            <div class="fertilizer-method-icon"><i class="fas fa-recycle"></i></div>
+                            <h3>COMPOSTING</h3>
+                        </div>
+                        <div class="fertilizer-method-content">
+                            <p>Converting organic waste materials into nutrient-rich soil amendment through decomposition.</p>
+                            <ul>
+                                <li>Recycles kitchen and garden waste</li>
+                                <li>Improves soil structure and water retention</li>
+                                <li>Adds diverse nutrients and beneficial microbes</li>
+                            </ul>
+                        </div>
+                        <div class="fertilizer-method-footer">
+                            <button onclick="copyToClipboard('Composting explained for kids')">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Method 2 -->
+                    <div class="fertilizer-method">
+                        <div class="fertilizer-method-header">
+                            <div class="fertilizer-method-icon"><i class="fas fa-leaf"></i></div>
+                            <h3>GREEN MANURE</h3>
+                        </div>
+                        <div class="fertilizer-method-content">
+                            <p>Growing cover crops specifically to be tilled into soil to add nutrients and organic matter.</p>
+                            <ul>
+                                <li>Fixes nitrogen when using legumes</li>
+                                <li>Prevents soil erosion between crops</li>
+                                <li>Suppresses weeds naturally</li>
+                            </ul>
+                        </div>
+                        <div class="fertilizer-method-footer">
+                            <button onclick="copyToClipboard('Green Manure explained for kids')">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Method 3 -->
+                    <div class="fertilizer-method">
+                        <div class="fertilizer-method-header">
+                            <div class="fertilizer-method-icon"><i class="fas fa-sync"></i></div>
+                            <h3>CROP ROTATION</h3>
+                        </div>
+                        <div class="fertilizer-method-content">
+                            <p>Planting different crops in sequence in the same area to maintain soil health and fertility.</p>
+                            <ul>
+                                <li>Disrupts pest and disease cycles</li>
+                                <li>Balances nutrient usage over time</li>
+                                <li>Improves soil structure and biodiversity</li>
+                            </ul>
+                        </div>
+                        <div class="fertilizer-method-footer">
+                            <button onclick="copyToClipboard('Crop Rotation explained for kids')">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Method 4 -->
+                    <div class="fertilizer-method">
+                        <div class="fertilizer-method-header">
+                            <div class="fertilizer-method-icon"><i class="fas fa-poop"></i></div>
+                            <h3>ANIMAL MANURE</h3>
+                        </div>
+                        <div class="fertilizer-method-content">
+                            <p>Using properly processed animal waste as a natural fertilizer rich in nutrients.</p>
+                            <ul>
+                                <li>Contains diverse macro and micronutrients</li>
+                                <li>Improves soil organic matter content</li>
+                                <li>Enhances microbial activity in soil</li>
+                            </ul>
+                        </div>
+                        <div class="fertilizer-method-footer">
+                            <button onclick="copyToClipboard('Animal Manure explained for kids')">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <h4>REFLECT ON OUR FARM VISIT</h4>
+                    <p>Did the farm we visited utilise any of these fertilising methods?</p>
+                    <p>Do you think their soil would hold up over time and be able to sustain more farming families and more crop yields? Why/why not?</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for image zoom -->
+    <div class="image-modal">
+        <div class="modal-content">
+            <img src="" alt="Zoomed image">
+            <div class="close-modal">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for functionality -->
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => {
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        content.classList.remove('active');
+                    }, 200);
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content with animation
+                const tabId = button.getAttribute('data-tab');
+                setTimeout(() => {
+                    document.getElementById(tabId).classList.add('active');
+                    setTimeout(() => {
+                        document.getElementById(tabId).style.opacity = '1';
+                        document.getElementById(tabId).style.transform = 'translateY(0)';
+                    }, 50);
+                }, 200);
+            });
+        });
+        
+        // Question card expand/collapse
+        const questionCards = document.querySelectorAll('.question-card');
+        questionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+        
+        // Toggle resource visibility
+        function toggleResource(resourceId) {
+            const resource = document.getElementById(resourceId);
+            if (resource.classList.contains('active')) {
+                resource.style.opacity = '0';
+                setTimeout(() => {
+                    resource.classList.remove('active');
+                }, 300);
+            } else {
+                resource.classList.add('active');
+                setTimeout(() => {
+                    resource.style.opacity = '1';
+                }, 10);
+            }
+        }
+        
+        // Fixed Copy to clipboard function with tooltip
+        function copyToClipboard(text) {
+            // Add visual feedback to the button
+            const button = event.currentTarget;
+            button.classList.add('clicked');
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Create tooltip
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = `"${text}" ready to paste into Google!`;
+                document.body.appendChild(tooltip);
+                
+                // Position tooltip near the button
+                const rect = button.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + rect.width/2 - 125}px`; // Center tooltip
+                tooltip.style.top = `${rect.top - 40}px`; // Position above button
+                
+                // Show tooltip
+                setTimeout(() => {
+                    tooltip.classList.add('show');
+                }, 10);
+                
+                // Hide and remove tooltip after delay
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(tooltip);
+                        // Reset button color after tooltip is gone
+                        setTimeout(() => {
+                            button.classList.remove('clicked');
+                        }, 500);
+                    }, 300);
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                // Reset button even if there's an error
+                setTimeout(() => {
+                    button.classList.remove('clicked');
+                }, 2000);
+            });
+        }
+        
+        // Ranking activity functionality
+        const foodRanking = document.getElementById('food-ranking');
+        const rankingItems = document.querySelectorAll('.ranking-item');
+        
+        let draggedItem = null;
+        
+        // Correct ordering according to environmental impact (from most to least sustainable)
+        const correctOrder = [5, 4, 3, 6, 2, 1]; // Leafy Greens, Lentils, Rice, Avocado, Chicken, Beef
+        
+        // Event listeners for drag and drop
+        rankingItems.forEach(item => {
+            item.addEventListener('dragstart', () => {
+                draggedItem = item;
+                setTimeout(() => {
+                    item.classList.add('dragging');
+                }, 0);
+            });
+            
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+                draggedItem = null;
+                updateRankingNumbers();
+            });
+            
+            item.addEventListener('dragover', e => {
+                e.preventDefault();
+            });
+            
+            item.addEventListener('drop', e => {
+                e.preventDefault();
+                if (draggedItem !== item) {
+                    // Find the position of the dragged item
+                    const items = [...foodRanking.querySelectorAll('.ranking-item')];
+                    const draggedIndex = items.indexOf(draggedItem);
+                    const targetIndex = items.indexOf(item);
+                    
+                    // Move the item
+                    if (draggedIndex < targetIndex) {
+                        foodRanking.insertBefore(draggedItem, item.nextSibling);
+                    } else {
+                        foodRanking.insertBefore(draggedItem, item);
+                    }
+                }
+            });
+        });
+        
+        // Update ranking numbers
+        function updateRankingNumbers() {
+            const items = document.querySelectorAll('#food-ranking .ranking-item');
+            items.forEach((item, index) => {
+                const numberElement = item.querySelector('.ranking-number');
+                numberElement.textContent = index + 1;
+            });
+        }
+        
+        // Check answer functionality - only one chance
+        let hasCheckedAnswer = false;
+        
+        document.getElementById('check-ranking').addEventListener('click', () => {
+            if (hasCheckedAnswer) {
+                return; // Already checked once, don't allow again
+            }
+            
+            const secretCode = document.getElementById('secret-code').value.toLowerCase();
+            if (secretCode === 'banana') {
+                // Trigger confetti
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                
+                // Check if ranking is correct
+                const currentOrder = [];
+                const items = document.querySelectorAll('#food-ranking .ranking-item');
+                
+                items.forEach(item => {
+                    currentOrder.push(parseInt(item.getAttribute('data-id')));
+                    item.classList.remove('correct', 'incorrect');
+                });
+                
+                // Compare with correct order
+                let allCorrect = true;
+                for (let i = 0; i < correctOrder.length; i++) {
+                    if (currentOrder[i] === correctOrder[i]) {
+                        items[i].classList.add('correct');
+                    } else {
+                        items[i].classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                }
+                
+                // Display feedback
+                const feedbackEl = document.getElementById('ranking-feedback');
+                feedbackEl.classList.add('show-feedback');
+                
+                if (allCorrect) {
+                    feedbackEl.textContent = 'Perfect! Your ranking is correct. Well done!';
+                    feedbackEl.className = 'ranking-feedback show-feedback correct-feedback';
+                } else {
+                    feedbackEl.textContent = 'Not quite right. Some items are in the wrong position.';
+                    feedbackEl.className = 'ranking-feedback show-feedback incorrect-feedback';
+                }
+                
+                // Disable check button
+                document.getElementById('check-ranking').disabled = true;
+                document.getElementById('check-ranking').style.opacity = "0.6";
+                document.getElementById('check-ranking').style.cursor = "not-allowed";
+                
+                // Set flag to prevent multiple attempts
+                hasCheckedAnswer = true;
+            } else {
+                alert('Incorrect secret code! Ask your teacher for the right code.');
+            }
+        });
+        
+        // Modal for image zoom
+        const imageFrames = document.querySelectorAll('.image-frame');
+        const imageModal = document.querySelector('.image-modal');
+        const modalImage = document.querySelector('.modal-content img');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Open modal when clicking an image
+        imageFrames.forEach(frame => {
+            frame.addEventListener('click', () => {
+                const largeImageSrc = frame.getAttribute('data-image');
+                const smallImageSrc = frame.querySelector('img').src;
+                const altText = frame.querySelector('img').alt;
+                
+                // Use the large image if available, otherwise use the thumbnail
+                modalImage.src = largeImageSrc || smallImageSrc;
+                modalImage.alt = altText;
+                
+                // Show modal
+                imageModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+        
+        // Close modal when clicking the close button
+        closeModal.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+        
+        // Close modal when clicking outside the image
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            }
+        });
+        
+        // Carousel functionality
+        function initCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+            
+            // Show first slide initially
+            slides[0].classList.add('active');
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Show the selected slide
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            // Next button click
+            nextBtn.addEventListener('click', () => {
+                let nextIndex = currentSlide + 1;
+                if (nextIndex >= slides.length) {
+                    nextIndex = 0;
+                }
+                showSlide(nextIndex);
+            });
+            
+            // Previous button click
+            prevBtn.addEventListener('click', () => {
+                let prevIndex = currentSlide - 1;
+                if (prevIndex < 0) {
+                    prevIndex = slides.length - 1;
+                }
+                showSlide(prevIndex);
+            });
+            
+            // Dot clicks
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+            
+            // Auto advance every 5 seconds
+            setInterval(() => {
+                let nextIndex = currentSlide + 1;
+                if (nextIndex >= slides.length) {
+                    nextIndex = 0;
+                }
+                showSlide(nextIndex);
+            }, 5000);
+        }
+
+        // Make bars interactive
+    document.querySelectorAll('.chart-bar').forEach(bar => {
+        const value = bar.getAttribute('data-value');
+        const change = bar.getAttribute('data-change');
+        
+        bar.addEventListener('mouseover', () => {
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip show';
+            tooltip.textContent = `${value}g/day`;
+            document.body.appendChild(tooltip);
+            
+            // Position tooltip near the bar
+            const rect = bar.getBoundingClientRect();
+            tooltip.style.left = `${rect.left + rect.width/2 - 125}px`;
+            tooltip.style.top = `${rect.top - 40}px`;
+            
+            bar.tooltip = tooltip;
+        });
+        
+        bar.addEventListener('mouseout', () => {
+            if (bar.tooltip) {
+                bar.tooltip.remove();
+                bar.tooltip = null;
+            }
+        });
+    });
+        
+        // Initialize carousel when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initCarousel();
+            updateRankingNumbers();
+        });
+    </script>
+</body>
+</html>
